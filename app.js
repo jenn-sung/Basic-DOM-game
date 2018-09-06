@@ -9,7 +9,8 @@ GAME RULES:
 
 */
 
-let scores, roundScore, activePlayer;
+let scores, roundScore, activePlayer, gamePlaying;
+// global scope so other functions have access to variables
 
 init();
 
@@ -48,6 +49,9 @@ init();
 // using the btn function with btn-roll class and without the parenthesis operator because we want the event listener method to call it and not here. In this line, btn is called the call back function. It's a function that is not called by us, but by another function.
 
 document.querySelector('.btn-roll').addEventListener('click', function() {
+
+  if(gamePlaying) {
+  // makes sure that the game is actually playing
 
   // 1. Need a random number when someone clicks and only this function needs the dice variable, so moving the variable here. This function still access to the outer scope (e.g. scores, roundScore, activePlauer)
     var dice = Math.floor(Math.random() * 6) + 1;
@@ -100,10 +104,12 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
       // document.querySelector('.dice').style.display = 'none';
       // when new active player, the dice image is hidden and reset
     }
-
+  }
 });
 
 document.querySelector('.btn-hold').addEventListener('click', function() {
+    if (gamePlaying) {
+
     // Add current score to GLOBAL score
     scores[activePlayer] += roundScore;
     // scores[activePlayer] = scores[activePlayer] + round score;
@@ -150,11 +156,14 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
       // adds winner class to total player panel for active player
       document.querySelector('.player-' + activePlayer + '-panel').classList.remove('winner');
       // removes the active player class and active player dot from the winner's panel
+      gamePlaying = false;
+      // ends game playing when there is a winner and doesn't allow buttons to continue rolling
     } else {
 
         nextPlayer();
     }
-  });
+  }
+});
  
 
  // This next player code is not dry. It just copies the first player's code
