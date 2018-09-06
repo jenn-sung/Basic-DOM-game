@@ -18,8 +18,15 @@ activePlayer = 0;
 dice = Math.floor(Math.random() * 6) + 1;
 console.log(dice);
 
-document.querySelector('#score-0').textContent = dice;
-// selecting the id score-0 from .player-score for player 1. Then use textcontent method to display the randomized number on player one's dice.
+// document.querySelector('#current-0').textContent = dice;
+
+// selecting the id current-0 from .player-score for player 1 to be displayed on current dice box. Then use textcontent method to display the randomized number on player one's dice.
+
+document.querySelector('#current-' + activePlayer).textCentent = dice;
+// change to current- + activePlayer and change the activePlayer variable equal to one which then makes player two the active player.
+
+document.querySelector('.dice').style.display = 'none';
+// remove display of dice image when first opening the web page
 
 
 
