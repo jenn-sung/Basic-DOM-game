@@ -13,7 +13,7 @@ let scores, roundScore, activePlayer;
 
 scores = [0,0];
 roundScore = 0;
-activePlayer = 1;
+activePlayer = 0;
 
 // dice = Math.floor(Math.random() * 6) + 1;
 // console.log(dice);
@@ -28,10 +28,10 @@ activePlayer = 1;
 document.querySelector('.dice').style.display = 'none';
 // remove display of dice image when first opening the web page
 
-document.getElementById('score-0)').textContent = '0';
-document.getElementById('score-1)').textContent = '0';
-document.getElementById('current-0)').textContent = '0';
-document.getElementById('current-1)').textContent = '0';
+document.getElementById('score-0').textContent = '0';
+document.getElementById('score-1').textContent = '0';
+document.getElementById('current-0').textContent = '0';
+document.getElementById('current-1').textContent = '0';
 // getting elements by id from HTML and set all to zero and sets players and current score to zero for beginning of game.
 
 // function btn() {
@@ -57,6 +57,42 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 
   // 3. Update the round score IF the rolled number is NOT a 1
     
+    if (dice !== 1) {
+      // Add score
+      roundScore += dice;
+      // roundsScore = roundScore + dice
+      document.querySelector('#current-' + activePlayer).textContent = roundScore;
+      // if active player is player one then current 1 gets content and if active player is zero then current 0 gets the content
+    } else {
+      // if the dice rolls to one then next player
+      // Next player
+      activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+      // if (activePlayer === O) {
+        // activePlayer = 1;
+      // } else {
+        // activePlayer = 0;
+      // }
+      // 
+      // telling computer when to move to new active player
+      roundScore = 0;
+      // resets new active player's score to zero 
+
+      document.getElementById('current-0').textContent = '0';
+      document.getElementById('current-1').textContent = '0';
+      // as soon as player rolls one, their score needs to reset to zero
+
+      // document.querySelector('player-0-panel').classList.remove('active');
+      // removes active class once a new player is active when a 1 is rolled
+      // document.querySelector('player-1-panel').classList.add('active');
+      // makes the new active player active when 1 is rolled
+
+      document.querySelector('player-0-panel').classList.toggle('active');
+      document.querySelector('player-1-panel').classList.toggle('active');
+      // will toggle between players when a one is rolled and reset the previous player's current score to zero and show who the current active player is
+
+      document.querySelector('.dice').style.display = 'none';
+      // when new active player, the dice image is hidden and reset
+    }
 
 });
 
