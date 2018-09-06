@@ -11,10 +11,12 @@ GAME RULES:
 
 let scores, roundScore, activePlayer;
 
-scores = [0,0];
-roundScore = 0;
-activePlayer = 0;
+init();
 
+// scores = [0,0];
+// roundScore = 0;
+// activePlayer = 0;
+// used down on 
 // dice = Math.floor(Math.random() * 6) + 1;
 // console.log(dice);
 
@@ -25,14 +27,16 @@ activePlayer = 0;
 // document.querySelector('#current-' + activePlayer).textCentent = dice;
 // // change to current- + activePlayer and change the activePlayer variable equal to one which then makes player two the active player.
 
-document.querySelector('.dice').style.display = 'none';
+// document.querySelector('.dice').style.display = 'none';
 // remove display of dice image when first opening the web page
 
-document.getElementById('score-0').textContent = '0';
-document.getElementById('score-1').textContent = '0';
-document.getElementById('current-0').textContent = '0';
-document.getElementById('current-1').textContent = '0';
+// document.getElementById('score-0').textContent = '0';
+// document.getElementById('score-1').textContent = '0';
+// document.getElementById('current-0').textContent = '0';
+// document.getElementById('current-1').textContent = '0';
 // getting elements by id from HTML and set all to zero and sets players and current score to zero for beginning of game.
+
+// because the above code is used in the beginning of the game and we now created an initialize function, moved the code down within the function
 
 // function btn() {
   
@@ -168,7 +172,40 @@ function nextPlayer() {
   document.querySelector('.dice').style.display = 'none';
 }
 
-// allows for player to hold score when next player is up
+document.querySelector('.btn-new').addEventListener('click', init); 
+  // scores =[0,0];
+  // activePlayer = 0;
+  // roundScore = 0;
+  // need to reset the variables for a new game, but it's not dry because it's already used at the top. So will create a function instead.
+
+  // passing the initialize function below within the event listener
+
+function init() {
+  scores =[0,0];
+  activePlayer = 0;
+  roundScore = 0;
+  // this function is used to initialize the game when it first opens and when a new game is needed.
+
+  document.querySelector('.dice').style.display = 'none';
+// remove display of dice image when first opening the web page
+  document.getElementById('score-0').textContent = '0';
+  document.getElementById('score-1').textContent = '0';
+  document.getElementById('current-0').textContent = '0';
+  document.getElementById('current-1').textContent = '0';
+// getting elements by id from HTML and set all to zero and sets players and current score to zero for beginning of game.
+  document.getElementById('name-0').textContent = 'Player 1';
+  document.getElementById('name-1').textContent = 'Player 2';
+  // changing name back to player instead of winner after new game is started
+  document.querySelector('.player-0-panel').classList.remove('winner');
+  document.querySelector('.player-1-panel').classList.remove('winner');
+  // remove winner label from winning player
+  document.querySelector('.player-0-panel').classList.remove('active');
+  document.querySelector('.player-1-panel').classList.remove('active');
+  // remove active player from both players when there is a winner and for the beginning of the new game
+  document.querySelector('.player-1-panel').classList.add('active');
+  // adding active player back for a new game
+  // 
+}
 
 
 
