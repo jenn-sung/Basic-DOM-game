@@ -60,13 +60,16 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     if (dice !== 1) {
       // Add score
       roundScore += dice;
+      
       // roundsScore = roundScore + dice
       document.querySelector('#current-' + activePlayer).textContent = roundScore;
       // if active player is player one then current 1 gets content and if active player is zero then current 0 gets the content
     } else {
       // if the dice rolls to one then next player
+      
       // Next player
-      activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+
+     
       // if (activePlayer === O) {
         // activePlayer = 1;
       // } else {
@@ -74,11 +77,11 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
       // }
       // 
       // telling computer when to move to new active player
-      roundScore = 0;
+      // roundScore = 0;
       // resets new active player's score to zero 
 
-      document.getElementById('current-0').textContent = '0';
-      document.getElementById('current-1').textContent = '0';
+      // document.getElementById('current-0').textContent = '0';
+      // document.getElementById('current-1').textContent = '0';
       // as soon as player rolls one, their score needs to reset to zero
 
       // document.querySelector('player-0-panel').classList.remove('active');
@@ -86,21 +89,86 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
       // document.querySelector('player-1-panel').classList.add('active');
       // makes the new active player active when 1 is rolled
 
-      document.querySelector('player-0-panel').classList.toggle('active');
-      document.querySelector('player-1-panel').classList.toggle('active');
+      // document.querySelector('player-0-panel').classList.toggle('active');
+      // document.querySelector('player-1-panel').classList.toggle('active');
       // will toggle between players when a one is rolled and reset the previous player's current score to zero and show who the current active player is
 
-      document.querySelector('.dice').style.display = 'none';
+      // document.querySelector('.dice').style.display = 'none';
       // when new active player, the dice image is hidden and reset
     }
 
 });
 
-// going to use an anonymous function in the event listener because we will only use it within this method and nowhere else.
+document.querySelector('.btn-hold').addEventListener('click', function() {
+    // Add current score to GLOBAL score
+    scores[activePlayer] += roundScore;
+    // scores[activePlayer] = scores[activePlayer] + round score;
+    // using the scores and activeplayer variables to write scores in array. Adds the score from this round to the score already in place.
+
+    // if the active player is the first player then it's the first score of the scores array and if it's the second player, it's the second score of the scores array
+
+    // Update the UI 
+    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+    // updates the score in the browser and select the points from the active player within the scores array
 
 
 
+    // Next Player
+    // activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+      // 
+      // roundScore = 0;
+     
 
+      // document.getElementById('current-0').textContent = '0';
+      // document.getElementById('current-1').textContent = '0';
+      //
+
+      // document.querySelector('player-0-panel').classList.remove('active');
+      
+      // document.querySelector('player-1-panel').classList.add('active');
+      
+      // document.querySelector('player-0-panel').classList.toggle('active');
+      // document.querySelector('player-1-panel').classList.toggle('active');
+      
+
+      // document.querySelector('.dice').style.display = 'none';
+//     }
+
+// });
+
+    // Check if player won the game
+    if (scores[activePlayer] >= 100) {
+      document.querySelector('#name-' + activePlayer).textContent = 'Winner';
+      // checks to see who wins 100 or more points and shows "winner."
+      document.querySelector('.dice').style.display = 'none';
+      // removes the dice image when a winner takes place
+      document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+      // adds winner class to total player panel for active player
+      document.querySelector('.player-' + activePlayer + '-panel').classList.remove('winner');
+      // removes the active player class and active player dot from the winner's panel
+    } else {
+
+        nextPlayer();
+    }
+  });
+ 
+
+ // This next player code is not dry. It just copies the first player's code
+
+function nextPlayer() {
+  activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+  roundScore = 0;
+
+  document.getElementById('current-0').textContent = '0';
+  document.getElementById('current-1').textContent = '0';
+
+  document.querySelector('player-0-panel').classList.remove('active');  
+  document.querySelector('player-1-panel').classList.add('active');
+
+  document.querySelector('.dice').style.display = 'none';
+}
+
+// allows for player to hold score when next player is up
 
 
 
