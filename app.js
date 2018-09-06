@@ -28,6 +28,11 @@ activePlayer = 1;
 document.querySelector('.dice').style.display = 'none';
 // remove display of dice image when first opening the web page
 
+document.getElementById('score-0)').textContent = '0';
+document.getElementById('score-1)').textContent = '0';
+document.getElementById('current-0)').textContent = '0';
+document.getElementById('current-1)').textContent = '0';
+// getting elements by id from HTML and set all to zero and sets players and current score to zero for beginning of game.
 
 // function btn() {
   
